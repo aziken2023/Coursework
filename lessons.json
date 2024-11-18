@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Math",
+    "price": 90,
+    "remaining": 10,
+    "details": "Learn advanced mathematical concepts.",
+    "location": "London",
+    "rating": 4,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU6IytLppQoeoLy-TpLAUuJr0jwI21Q3GXug&s"
+  },
+  {
+    "name": "Science",
+    "price": 100,
+    "remaining": 10,
+    "details": "Explore physics, chemistry, and biology.",
+    "location": "Manchester",
+    "rating": 3,
+    "image": "https://img.freepik.com/free-vector/colorful-science-objects-icons-vector-set_1308-131708.jpg?w=360"
+  },
+  {
+    "name": "History",
+    "price": 110,
+    "remaining": 10,
+    "details": "Understand key historical events.",
+    "location": "Birmingham",
+    "rating": 5,
+    "image": "https://www.euroschoolindia.com/wp-content/uploads/2023/07/how-to-learn-history.jpg"
+  },
+  {
+    "name": "English",
+    "price": 120,
+    "remaining": 10,
+    "details": "Improve your reading and writing skills.",
+    "location": "Edinburgh",
+    "rating": 4,
+    "image": "https://www.fpacademy.co.in/blog/wp-content/uploads/2022/09/How-to-Learn-English-Speaking-at-Home-960x540-1.jpg"
+  },
+  {
+    "name": "Computer Science",
+    "price": 130,
+    "remaining": 10,
+    "details": "Master programming languages.",
+    "location": "Bristol",
+    "rating": 5,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRApVv2baGsCsW3O-KeaWxJEEsMdyNnAsdUYQ&s"
+  },
+  {
+    "name": "Geography",
+    "price": 140,
+    "remaining": 10,
+    "details": "Explore Earth's landscapes, climates, and cultures.",
+    "location": "Nottingham",
+    "rating": 4,
+    "image": "https://www.dundryprimary.co.uk/wp-content/uploads/2021/11/geography-banners-stock-illustrations-1505-geog.jpeg"
+  },
+  {
+    "name": "Music",
+    "price": 150,
+    "remaining": 10,
+    "details": "Learn music theory, composition, and performance.",
+    "location": "Liverpool",
+    "rating": 3,
+    "image": "https://valleycultural.org/wp-content/uploads/2021/07/Music-scaled.jpg"
+  },
+  {
+    "name": "Economics",
+    "price": 160,
+    "remaining": 10,
+    "details": "Increase your knowledge of the economic world.",
+    "location": "Cardiff",
+    "rating": 5,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNfF1cl0B_Elwhcqbk5jrLaQz1LemQ7Mgu5w&s"
+  },
+  {
+    "name": "Art and Craft",
+    "price": 170,
+    "remaining": 10,
+    "details": "Master creative techniques for artistic projects.",
+    "location": "Glasgow",
+    "rating": 4,
+    "image": "https://www.ncfe.ac.in/images/Background%20for%20website/National%20Centre%20for%20Excellence%20-%20Best%20School%20in%20CV%20Raman%20Nagar%20-%20Art%20and%20Craft%20Cover.jpeg"
+  },
+  {
+    "name": "Astronomy",
+    "price": 180,
+    "remaining": 10,
+    "details": "Learn about our solar system in our astronomy classes.",
+    "location": "Leicester",
+    "rating": 5,
+    "image": "https://www.astronomy.com/uploads/2023/09/Astronomy-Home-Page-Image.png"
+  }
+]

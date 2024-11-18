@@ -30,7 +30,7 @@ async function connectDB() {
   try {
     client.connect();
     console.log('Connected to MongoDB');
-    db1 = client.db('Petstore');
+    db1 = client.db('Online_Tuition');
   } catch (err) {
     console.error('MongoDB connection error:', err);
   }
@@ -48,8 +48,15 @@ app.param('collectionName', async function(req, res, next, collectionName) {
 
 // Ensure this route is defined after the middleware app.param
 // get all data from our collection in Mongodb
-app.get('/collections/:collectionName', async function(req, res, next) {
-    
+app.get('/collections/lesson', async function (req, res, next) {
+  try {
+      // Fetch all documents from the 'lesson' collection
+      const lessons = await db1.collection('lesson').find({}).toArray();
+      res.json(lessons); // Send the lessons as JSON response
+  } catch (err) {
+      console.error('Error fetching lessons:', err);
+      res.status(500).json({ error: 'An error occurred while fetching lessons' });
+  }
 });
 
 app.get('/collections1/:collectionName', async function(req, res, next) {
