@@ -35,6 +35,7 @@ export class Cart {
     }
   }
 
+  
   getTotalPrice() {
     return this.items.reduce((total, item) => total + item.price, 0);
   }
@@ -52,9 +53,9 @@ export const availableCourses = [
   new Course("History", 110, 10, "Understand key historical events.", "Birmingham", 5, "https://www.euroschoolindia.com/wp-content/uploads/2023/07/how-to-learn-history.jpg"),
   new Course("English", 120, 10, "Improve your reading and writing skills.", "Edinburgh", 4, "https://www.fpacademy.co.in/blog/wp-content/uploads/2022/09/How-to-Learn-English-Speaking-at-Home-960x540-1.jpg"),
   new Course("Computer Science", 130, 10, "Master programming languages.", "Bristol", 5, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRApVv2baGsCsW3O-KeaWxJEEsMdyNnAsdUYQ&s"),
-  new Course("IET", 140, 10, "Explore the Engineering world.", "Nottingham", 4, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVBhIYUai2Xfb2cTxeEI3KIpLY-b4WNGG9cA&s"),
-  new Course("Debate Club", 150, 10, "Show your talents in our Debate society.", "Liverpool", 3, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZD-Wll7Zqy7NWRNeJuIoIqSEz6arK7hS1dA&s"),
+  new Course("Geography", 140, 10, "Explore Earth's landscapes, climates, and cultures.", "Nottingham", 4, "https://www.dundryprimary.co.uk/wp-content/uploads/2021/11/geography-banners-stock-illustrations-1505-geog.jpeg"),
+  new Course("Music", 150, 10, "Learn music theory, composition, and performance.", "Liverpool", 3, "https://valleycultural.org/wp-content/uploads/2021/07/Music-scaled.jpg"),
   new Course("Economics", 160, 10, "Increase your knowledge of the economic world.", "Cardiff", 5, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNfF1cl0B_Elwhcqbk5jrLaQz1LemQ7Mgu5w&s"),
-  new Course("Fishing Club", 170, 10, "Enjoy fishing in our beautiful lakes and ponds.", "Glasgow", 4, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdQlrB26BSAj6nEI8wscI1Csza1YwePqtUSA&s"),
+  new Course("Art and Craft", 170, 10, "Master creative techniques for artistic projects.", "Glasgow", 4, "https://www.ncfe.ac.in/images/Background%20for%20website/National%20Centre%20for%20Excellence%20-%20Best%20School%20in%20CV%20Raman%20Nagar%20-%20Art%20and%20Craft%20Cover.jpeg"),
   new Course("Astronomy", 180, 10, "Learn about our solar system in our astronomy classes.", "Leicester", 5, "https://www.astronomy.com/uploads/2023/09/Astronomy-Home-Page-Image.png"),
 ];

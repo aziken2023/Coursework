@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buy Tuition Online</title>
+  <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+  <script type="module" src="coursework.js"></script>
+  <style>
+    body {
+      background-color: lightcyan;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .course-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .course-card {
+      border: 1px solid #ccc;
+      padding: 16px;
+      border-radius: 8px;
+      width: 200px;
+      text-align: center;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .course-card img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    button {
+      margin-top: 8px;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:disabled {
+      background-color: grey;
+      cursor: not-allowed;
+    }
+    .cart-container {
+      margin-top: 20px;
+    }
+    .footer {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .form-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #f8f9fa;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 300px;
+      max-width: 90%;
+    }
+    .form-container h2 {
+      margin-bottom: 10px;
+      font-size: 20px;
+      text-align: center;
+    }
+    .form-container label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+    .form-container input,
+    .form-container select {
+      width: 100%;
+      padding: 6px;
+      margin-bottom: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .form-container button {
+      width: 48%;
+      padding: 8px;
+      margin-top: 8px;
+    }
+    .view-cart-btn {
+      position: relative;
+    }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: red;
+      color: white;
+      border-radius: 50%;
+      padding: 4px 8px;
+      font-size: 14px;
+    }
+    .search-container {
+      margin-bottom: 20px;
+    }
+    .sort-container {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ title }}</h1>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+      <input type="text" v-model="searchQuery" placeholder="Search courses..." />
+      <button v-on:click="searchCourses">Search</button>
+    </div>
+
+    <!-- Sorting -->
+    <div class="sort-container">
+      <label for="sortBy">Sort By:</label>
+      <select v-model="sortBy" v-on:change="sortCourses">
+        <option value="">Select</option>
+        <option value="name">Name</option>
+        <option value="price">Price</option>
+        <option value="remaining">Availability</option>
+      </select>
+    </div>
+
+    <!-- Courses -->
+    <div class="course-container" v-if="!showCart && !showForm">
+      <div class="course-card" v-for="course in filteredCourses" :key="course.name">
+        <img :src="course.image" alt="Course Image" />
+        <h3>{{ course.name }}</h3>
+        <p>Price: £{{ course.price }}</p>
+        <p>Details: {{ course.details }}</p>
+        <p v-if="course.remaining > 0">Remaining: {{ course.remaining }}</p>
+        <p v-else style="color: red;">Out of Stock</p>
+        <button v-if="course.remaining > 0" v-on:click="addToCart(course)">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Cart -->
+    <div v-if="showCart">
+      <h2>Cart</h2>
+      <div class="course-container">
+        <div class="course-card" v-for="(item, index) in cart.items" :key="index">
+          <img :src="item.image" alt="Course Image" />
+          <h3>{{ item.name }}</h3>
+          <p>Price: £{{ item.price }}</p>
+          <p>Details: {{ item.details }}</p>
+          <!-- Use v-on:click to remove item from cart -->
+          <button v-on:click="removeFromCart(index)">Remove</button>
+        </div>
+      </div>
+      <button v-on:click="checkout">Proceed to Checkout</button>
+      <button v-on:click="showCart = false">Back</button>
+    </div>
+
+    <!-- Checkout Form -->
+    <div v-if="showForm" class="form-container">
+      <h2>Checkout</h2>
+      <form @submit.prevent="submitForm">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" v-model="form.firstName" required />
+        
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" v-model="form.lastName" required />
+        
+        <label for="email">Email</label>
+        <input type="email" id="email" v-model="form.email" pattern=".+@.+\..+" required />
+        
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" v-model="form.phone" pattern="\+[0-9]+" required />
+        
+        <label for="address">Address</label>
+        <input type="text" id="address" v-model="form.address" required />
+        
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" v-model="form.dob" required />
+        
+        <label for="nationality">Nationality</label>
+        <select id="nationality" v-model="form.nationality" required>
+          <option v-for="country in countries" :key="country" :value="country">{{ country }}</option>
+        </select>
+        
+        <label for="postalCode">Postal Code</label>
+        <input type="text" id="postalCode" v-model="form.postalCode" required />
+        
+        <div>
+          <button v-on:click="submitForm" type="submit">Submit</button>
+          <button v-on:click="showForm = false">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- View Cart Button -->
+    <div class="footer" v-if="!showCart && !showForm">
+      <button v-on:click="showCart = true" class="view-cart-btn">
+        View Cart
+        <span class="cart-count" v-if="cart.items.length > 0">{{ cart.items.length }}</span>
+      </button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { availableCourses, Cart } from "./coursework.js";
+
+    new Vue({
+      el: "#app",
+      data: {
+        title: "Buy Tuition Online",
+        availableCourses,
+        cart: new Cart(),
+        searchQuery: "",
+        sortBy: "",
+        showCart: false,
+        showForm: false,
+        form: {
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          address: "",
+          dob: "",
+          nationality: "",
+          postalCode: "",
+        },
+        countries: ["United States", "Canada", "Mauritius", "United Kingdom", "Australia", "India", "Nigeria", "China", "Japan", "Germany", "France"],
+      },
+      computed: {
+        filteredCourses() {
+          return this.availableCourses.filter(course => 
+            course.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+          );
+        },
+      },
+      methods: {
+        addToCart(course) {
+          this.cart.addToCart(course);
+        },
+        removeFromCart(index) {
+          this.cart.removeFromCart(index);
+        },
+        checkout() {
+          this.showForm = true;
+          this.showCart = false;
+        },
+        submitForm() {
+          // Process the form submission here (e.g., save user data, show confirmation, etc.)
+          alert('Checkout successful!');
+          this.showForm = false;
+          this.cart.clear();
+        },
+        searchCourses() {
+          // Triggered by the search button
+        },
+        sortCourses() {
+          // Sorting logic based on this.sortBy
+        },
+      },
+    });
+  </script>
+</body>
+</html>
