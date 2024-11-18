@@ -211,59 +211,80 @@
     import { availableCourses, Cart } from "./coursework.js";
 
     new Vue({
-      el: "#app",
-      data: {
-        title: "Buy Tuition Online",
-        availableCourses,
-        cart: new Cart(),
-        searchQuery: "",
-        sortBy: "",
-        showCart: false,
-        showForm: false,
-        form: {
-          firstName: "",
-          lastName: "",
-          email: "",
-          phone: "",
-          address: "",
-          dob: "",
-          nationality: "",
-          postalCode: "",
-        },
-        countries: ["United States", "Canada", "Mauritius", "United Kingdom", "Australia", "India", "Nigeria", "China", "Japan", "Germany", "France"],
-      },
-      computed: {
-        filteredCourses() {
-          return this.availableCourses.filter(course => 
-            course.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-          );
-        },
-      },
-      methods: {
-        addToCart(course) {
-          this.cart.addToCart(course);
-        },
-        removeFromCart(index) {
-          this.cart.removeFromCart(index);
-        },
-        checkout() {
-          this.showForm = true;
-          this.showCart = false;
-        },
-        submitForm() {
-          // Process the form submission here (e.g., save user data, show confirmation, etc.)
-          alert('Checkout successful!');
-          this.showForm = false;
-          this.cart.clear();
-        },
-        searchCourses() {
-          // Triggered by the search button
-        },
-        sortCourses() {
-          // Sorting logic based on this.sortBy
-        },
-      },
-    });
+  el: "#app",
+  data: {
+    title: "Buy Tuition Online",
+    availableCourses: [], // Initialize with an empty array
+    cart: new Cart(),
+    searchQuery: "",
+    sortBy: "",
+    showCart: false,
+    showForm: false,
+    form: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      address: "",
+      dob: "",
+      nationality: "",
+      postalCode: "",
+    },
+    countries: [
+      "United States", "Canada", "Mauritius", "United Kingdom", "Australia",
+      "India", "Nigeria", "China", "Japan", "Germany", "France"
+    ],
+  },
+  computed: {
+    filteredCourses() {
+      return this.availableCourses.filter(course =>
+        course.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    },
+  },
+  methods: {
+    async fetchCourses() {
+      try {
+        // Fetch courses from the backend
+        const response = await fetch("http://localhost:3000/collections/lesson");
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const courses = await response.json();
+        this.availableCourses = courses;
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+        alert("Failed to load courses. Please try again later.");
+      }
+    },
+    addToCart(course) {
+      this.cart.addToCart(course);
+    },
+    removeFromCart(index) {
+      this.cart.removeFromCart(index);
+    },
+    checkout() {
+      this.showForm = true;
+      this.showCart = false;
+    },
+    submitForm() {
+      alert('Checkout successful!');
+      this.showForm = false;
+      this.cart.clear();
+    },
+    searchCourses() {
+      // Triggered by the search button
+    },
+    sortCourses() {
+      // Sorting logic based on this.sortBy
+    },
+  },
+  async mounted() {
+    // Fetch courses when the app is mounted
+    await this.fetchCourses();
+  },
+});
+
   </script>
 </body>
 </html>
