@@ -137,7 +137,6 @@
         <h3>{{ course.name }}</h3>
         <p>Price: £{{ course.price }}</p>
         <p>Details: {{ course.details }}</p>
-        <p>location: {{ course.location }}</p>
         <p v-if="course.remaining > 0">Remaining: {{ course.remaining }}</p>
         <p v-else style="color: red;">Out of Stock</p>
         <button v-if="course.remaining > 0" v-on:click="addToCart(course)">Add to Cart</button>
@@ -153,7 +152,6 @@
           <h3>{{ item.name }}</h3>
           <p>Price: £{{ item.price }}</p>
           <p>Details: {{ item.details }}</p>
-          <p>location: {{ item. }}</p>
           <!-- Use v-on:click to remove item from cart -->
           <button v-on:click="removeFromCart(index)">Remove</button>
         </div>
