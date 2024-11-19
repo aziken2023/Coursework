@@ -7,7 +7,7 @@ new Vue({
             items: [],
             addToCart(course) {
                 if (course.remaining > 0) {
-                    this.items.push({ image: course.image, name: course.name, location: course.locaton, details: course.details, price: course.price });
+                    this.items.push({ image: course.image, name: course.name, location: course.location, details: course.details, price: course.price });
                     course.remaining--;
                 }
             },
