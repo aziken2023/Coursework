@@ -112,11 +112,39 @@ new Vue({
         this.showForm = true;
         this.showCart = false;
       },
-      submitForm() {
-        const totalPrice = this.cart.getTotalPrice();
-        alert(`Thank you for your purchase! You spent a total of £${totalPrice.toFixed(2)}.`);
-        this.showForm = false;
-        this.cart.clear();
+      SubmitForm() {
+        // Collect the form data
+        const orderData = {
+          firstName: this.form.firstName,
+          lastName: this.form.lastName,
+          email: this.form.email,
+          phone: this.form.phone,
+          address: this.form.address,
+          dob: this.form.dob,
+          nationality: this.form.nationality,
+          postalCode: this.form.postalCode,
+          cartItems: this.cart.items, // Include the cart items if needed
+        };
+    
+        // Send the data to the server using fetch
+        fetch('http://localhost:3000/orders', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(orderData), // Convert the order data to JSON
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+          alert('Your order has been placed!');
+          this.showForm = false; // Close the form after submission
+          this.cart.items = []; // Optionally clear the cart after the order is placed
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('An error occurred while placing your order.');
+        });
       },
       searchCourses() {
         // Logic for the search button can be implemented here
