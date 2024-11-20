@@ -112,7 +112,7 @@ new Vue({
         this.showForm = true;
         this.showCart = false;
       },
-      SubmitForm() {
+      submitForm() {
         // Collect the form data
         const orderData = {
           firstName: this.form.firstName,
