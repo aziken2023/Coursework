@@ -7,8 +7,9 @@ new Vue({
         items: [],
         addToCart(course) {
           if (course.remaining > 0) {
-            this.items.push({ image: course.image, name: course.name, details: course.details, price: course.price });
+            this.items.push({ id: course._id, image: course.image, name: course.name, details: course.details, price: course.price });
             course.remaining--;
+            this.updateCourseAvailability(course._id, 1); // Update the course availability (decrement)
           }
         },
         removeFromCart(index, availableCourses) {
@@ -17,6 +18,7 @@ new Vue({
           const course = availableCourses.find(c => c.name === item.name);
           if (course) {
             course.remaining++;
+            this.updateCourseAvailability(course._id, -1); // Revert the course availability (increment)
           }
         },
         getTotalPrice() {
@@ -24,6 +26,26 @@ new Vue({
         },
         clear() {
           this.items = [];
+        },
+        async updateCourseAvailability(courseId, quantity) {
+          try {
+            const response = await fetch(`http://localhost:3000/courses/${courseId}`, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ quantity }),
+            });
+  
+            const data = await response.json();
+            if (response.ok) {
+              console.log('Course availability updated:', data);
+            } else {
+              console.error('Failed to update course availability:', data);
+            }
+          } catch (error) {
+            console.error('Error updating course availability:', error);
+          }
         },
       },
       searchQuery: "",
@@ -124,9 +146,9 @@ new Vue({
           postalCode: this.form.postalCode,
           cartItems: this.cart.items, // Include the cart items if needed
         };
-      
+  
         console.log('Order data:', orderData); // Add this log to check the data
-      
+  
         fetch('http://localhost:3000/orders', {
           method: 'POST',
           headers: {
