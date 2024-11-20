@@ -199,11 +199,16 @@
 
     <!-- View Cart Button -->
     <div class="footer" v-if="!showCart && !showForm">
-      <button v-on:click="showCart = true" class="view-cart-btn">
-        View Cart
-        <span class="cart-count" v-if="cart.items.length > 0">{{ cart.items.length }}</span>
+      <button 
+          v-on:click="showCart = true" 
+          class="view-cart-btn" 
+          :disabled="isCartEmpty"
+      >
+          View Cart
+          <span class="cart-count" v-if="cart.items.length > 0">{{ cart.items.length }}</span>
       </button>
-    </div>
+  </div>
+  
   </div>
   <script type="module" src="main.js"></script>
 </body>
