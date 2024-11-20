@@ -53,7 +53,11 @@ new Vue({
                 course.name.toLowerCase().includes(this.searchQuery.toLowerCase())
             );
         },
+        isCartEmpty() {
+            return this.cart.items.length === 0;
+        }
     },
+    
     methods: {
         async fetchCourses() {
             try {
