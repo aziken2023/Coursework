@@ -113,7 +113,6 @@ new Vue({
         this.showCart = false;
       },
       submitForm() {
-        // Collect the form data
         const orderData = {
           firstName: this.form.firstName,
           lastName: this.form.lastName,
@@ -125,14 +124,15 @@ new Vue({
           postalCode: this.form.postalCode,
           cartItems: this.cart.items, // Include the cart items if needed
         };
-    
-        // Send the data to the server using fetch
+      
+        console.log('Order data:', orderData); // Add this log to check the data
+      
         fetch('http://localhost:3000/orders', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(orderData), // Convert the order data to JSON
+          body: JSON.stringify(orderData),
         })
         .then(response => response.json())
         .then(data => {
