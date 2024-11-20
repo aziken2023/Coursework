@@ -160,42 +160,72 @@
       <button v-on:click="showCart = false">Back</button>
     </div>
 
-    <!-- Checkout Form -->
-    <div v-if="showForm" class="form-container">
-      <h2>Checkout</h2>
-      <form @submit.prevent="submitForm">
-        <label for="firstName">First Name</label>
-        <input type="text" id="firstName" v-model="form.firstName" required />
-        
-        <label for="lastName">Last Name</label>
-        <input type="text" id="lastName" v-model="form.lastName" required />
-        
-        <label for="email">Email</label>
-        <input type="email" id="email" v-model="form.email" pattern=".+@.+\..+" required />
-        
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" v-model="form.phone" pattern="\+[0-9]+" required />
-        
-        <label for="address">Address</label>
-        <input type="text" id="address" v-model="form.address" required />
-        
-        <label for="dob">Date of Birth</label>
-        <input type="date" id="dob" v-model="form.dob" required />
-        
-        <label for="nationality">Nationality</label>
-        <select id="nationality" v-model="form.nationality" required>
+    
+ <!-- Checkout Form -->
+<div v-if="showForm" class="form-container">
+  <h2>Checkout</h2>
+  <form @submit.prevent="submitForm">
+      <label for="firstName">First Name</label>
+      <input 
+          type="text" 
+          id="firstName" 
+          v-model="form.firstName" 
+          required 
+          pattern="[a-zA-Z]+" 
+          title="Only letters are allowed." 
+      />
+      
+      <label for="lastName">Last Name</label>
+      <input 
+          type="text" 
+          id="lastName" 
+          v-model="form.lastName" 
+          required 
+          pattern="[a-zA-Z]+" 
+          title="Only letters are allowed." 
+      />
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" v-model="form.email" required />
+      
+      <label for="phone">Phone Number</label>
+      <input 
+          type="tel" 
+          id="phone" 
+          v-model="form.phone" 
+          required 
+          pattern="[0-9]+" 
+          title="Only numbers are allowed." 
+      />
+      
+      <label for="address">Address</label>
+      <input type="text" id="address" v-model="form.address" required />
+      
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" v-model="form.dob" required />
+      
+      <label for="nationality">Nationality</label>
+      <select id="nationality" v-model="form.nationality" required>
           <option v-for="country in countries" :key="country" :value="country">{{ country }}</option>
-        </select>
-        
-        <label for="postalCode">Postal Code</label>
-        <input type="text" id="postalCode" v-model="form.postalCode" required />
-        
-        <div>
-          <button v-on:click="submitForm" type="submit">Submit</button>
+      </select>
+      
+      <label for="postalCode">Postal Code</label>
+      <input type="text" id="postalCode" v-model="form.postalCode" required />
+      
+      <div>
+          <button 
+              type="submit" 
+              :disabled="!isFormComplete"
+          >
+              Submit
+          </button>
           <button v-on:click="showForm = false">Cancel</button>
-        </div>
-      </form>
-    </div>
+      </div>
+  </form>
+</div>
+
+
+
 
     <!-- View Cart Button -->
     <div class="footer" v-if="!showCart && !showForm">
