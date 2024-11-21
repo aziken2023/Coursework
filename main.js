@@ -7,7 +7,7 @@ new Vue({
         items: [],
         addToCart(course) {
           if (course.remaining > 0) {
-            this.items.push({ id: course._id, image: course.image, name: course.name, details: course.details, price: course.price });
+            this.items.push({ id: course._id, image: course.image, name: course.name, details: course.details, price: course.price, location: course.location });
             course.remaining--;
             this.updateCourseAvailability(course._id, 1); // Update the course availability (decrement)
           }
