@@ -154,7 +154,7 @@
           <h3>{{ item.name }}</h3>
           <p>Price: £{{ item.price }}</p>
           <p>Details: {{ item.details }}</p>
-          <p>Location: {{ course.location }}</p>
+          <p>Location: {{ item.location }}</p>
           <!-- Use v-on:click to remove item from cart -->
           <button v-on:click="removeFromCart(index)">Remove</button>
         </div>
