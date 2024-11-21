@@ -1,7 +1,7 @@
 new Vue({
     el: "#app",
     data: {
-      title: "Buy Tuition Online",
+      title: "WELCOME TO OUR ONLINE COURSE STORE",
       availableCourses: [],
       cart: {
         items: [],
