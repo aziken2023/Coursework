@@ -137,6 +137,7 @@
         <h3>{{ course.name }}</h3>
         <p>Price: £{{ course.price }}</p>
         <p>Details: {{ course.details }}</p>
+        <p>Location: {{ course.location }}</p>
         <p v-if="course.remaining > 0">Remaining: {{ course.remaining }}</p>
         <p v-else style="color: red;">Out of Stock</p>
         <button v-if="course.remaining > 0" v-on:click="addToCart(course)">Add to Cart</button>
