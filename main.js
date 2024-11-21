@@ -29,7 +29,7 @@ new Vue({
         },
         async updateCourseAvailability(courseId, quantity) {
           try {
-            const response = await fetch(`http://localhost:3000/courses/${courseId}`, {
+            const response = await fetch(`https://backend-1hjb.onrender.com/courses/${courseId}`, {
               method: 'PUT',
               headers: {
                 'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ new Vue({
     methods: {
       async fetchCourses() {
         try {
-          const response = await fetch("http://localhost:3000/collections/lesson");
+          const response = await fetch("https://backend-1hjb.onrender.com/collections/lesson");
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
@@ -149,7 +149,7 @@ new Vue({
   
         console.log('Order data:', orderData); // Add this log to check the data
   
-        fetch('http://localhost:3000/orders', {
+        fetch('https://backend-1hjb.onrender.com/orders', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
